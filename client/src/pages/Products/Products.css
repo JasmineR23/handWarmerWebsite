@@ -1,0 +1,90 @@
+.products {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: darkkhaki;
+    flex: 1;
+    margin: 20px;
+    background: var(--mystic-tulip);
+    border: 2px solid var(--dusty-path);
+    border-radius: var(--radius-lg);
+    padding: 30px;
+    box-shadow: var(--shadow-soft);
+
+}
+
+.products-elements {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: beige;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.hand-warmers-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 20px;
+}
+
+
+
+.hand-warmer-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.hand-warmer-image:hover {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.hand-warmer-item {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.hand-warmer-item:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-soft);
+}
+
+.hand-warmer-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background-color: blanchedalmond;
+    border-color: maroon;
+    border: 2px solid maroon;
+    border-radius: 20px;
+}
+
+.hand-warmers-item:hover {
+    cursor: pointer;
+    width: 120%;
+    height: 120%;
+}
+
+.filter {
+    width: 450px;
+    height: 800px;
+    border-radius: 25%;
+    margin: 50px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.filter {
+    width: 300px;
+    background: var(--light-yellow);
+    padding: 20px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+}

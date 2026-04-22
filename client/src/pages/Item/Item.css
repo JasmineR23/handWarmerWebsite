@@ -1,0 +1,40 @@
+.item-display{
+    
+    display: flex;
+    flex-direction: row;
+}
+
+.left-pane{
+    background-color: rosybrown;
+    display: flex;
+
+    flex-direction: row;
+    width: 729px;
+    height: 903px;
+    justify-content: center;
+    align-items: center;
+}
+
+.left-pane .display-image{
+    width: 50%;
+    height: 50%;
+    border-radius: 25%;
+
+}
+
+
+.right-pane{
+    display: flex;
+    flex-direction: column;
+    background-color: cadetblue;
+    width: 729px;
+    height: 903px;
+    gap: 15px;
+    justify-content: center;
+}
+
+.name, .description, .price, .quantity{
+    padding-left: 10px;
+    text-align: left;
+    justify-content: center;
+}

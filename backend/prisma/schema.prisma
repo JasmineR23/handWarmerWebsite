@@ -1,0 +1,193 @@
+// -----------------------------
+//  Prisma Setup
+// -----------------------------
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// -----------------------------
+//  MODELS — CROCHET INVENTORY
+// -----------------------------
+
+// 🧵 Yarn Inventory
+model Yarn {
+  id            Int               @id @default(autoincrement())
+  name          String
+  brand         String?
+  weight        String
+  fiberType     String?
+  color         String
+  yardage       Int?
+  quantity      Int               @default(0)
+  costPerUnit   Float?
+  supplierId    Int?
+  supplier      Supplier?         @relation(fields: [supplierId], references: [id])
+
+  movements     StockMovement[]
+  productsUsed  ProductMaterial[]
+
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @updatedAt
+}
+
+// 🪝 Crochet Hooks
+model Hook {
+  id               Int                @id @default(autoincrement())
+  size             String
+  material         String?
+  quantity         Int                @default(0)
+  supplierId       Int?
+  supplier         Supplier?          @relation(fields: [supplierId], references: [id])
+
+  movements        StockMovement[]
+  productMaterials ProductMaterial[]
+
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+}
+
+// 🧰 Tools & Accessories
+model Tool {
+  id               Int                @id @default(autoincrement())
+  name             String
+  type             String?
+  quantity         Int                @default(0)
+  supplierId       Int?
+  supplier         Supplier?          @relation(fields: [supplierId], references: [id])
+
+  movements        StockMovement[]
+  productMaterials ProductMaterial[]
+
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+}
+
+// 🔗 Junction table for materials used in HandWarmers
+model ProductMaterial {
+  id           Int              @id @default(autoincrement())
+  handWarmerId Int
+  yarnId       Int?
+  hookId       Int?
+  toolId       Int?
+  quantityUsed Float?
+
+  handWarmer   HandWarmer       @relation(fields: [handWarmerId], references: [id])
+  yarn         Yarn?            @relation(fields: [yarnId], references: [id])
+  hook         Hook?            @relation(fields: [hookId], references: [id])
+  tool         Tool?            @relation(fields: [toolId], references: [id])
+}
+
+// 🏪 Suppliers
+model Supplier {
+  id        Int       @id @default(autoincrement())
+  name      String
+  email     String?
+  phone     String?
+  website   String?
+
+  yarns     Yarn[]
+  hooks     Hook[]
+  tools     Tool[]
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+// 📦 Stock Movements (IN / OUT)
+model StockMovement {
+  id       Int          @id @default(autoincrement())
+  type     MovementType
+  quantity Int
+  note     String?
+
+  yarnId   Int?
+  hookId   Int?
+  toolId   Int?
+
+  yarn     Yarn?        @relation(fields: [yarnId], references: [id])
+  hook     Hook?        @relation(fields: [hookId], references: [id])
+  tool     Tool?        @relation(fields: [toolId], references: [id])
+
+  createdAt DateTime    @default(now())
+}
+
+// -----------------------------
+//  MODELS — HANDWARMER SYSTEM
+// -----------------------------
+
+model User {
+  id                Int                @id @default(autoincrement())
+  username          String
+  email             String             @unique
+  password          String
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  handWarmersPlaced HandWarmerPlaced[]
+}
+
+model HandWarmerPlaced {
+  id             Int         @id @default(autoincrement())
+  quantityPlaced Int
+
+  userId         Int?
+  handWarmerId   Int?
+
+  user           User?       @relation(fields: [userId], references: [id])
+  handWarmer     HandWarmer? @relation(fields: [handWarmerId], references: [id])
+}
+
+model HandWarmer {
+  id                Int                  @id @default(autoincrement())
+  name              String
+  quantity          Int
+  ordered           Int                  @default(0)
+  image             String
+  description       String
+  style             String
+
+  // Materials used to make this hand warmer
+  materials         ProductMaterial[]
+
+  // Users who placed this hand warmer
+  handWarmersPlaced HandWarmerPlaced[]
+
+  // Material breakdown (cotton %, acrylic %, etc.)
+  materialDetails   HandWarmerMaterial[]
+
+  createdAt         DateTime             @default(now())
+  updatedAt         DateTime             @updatedAt
+}
+
+model HandWarmerMaterial {
+  id           Int                    @id @default(autoincrement())
+  colour       String
+
+  handWarmerId Int?
+  handWarmer   HandWarmer?            @relation(fields: [handWarmerId], references: [id])
+
+  distribution MaterialDistribution[]
+}
+
+model MaterialDistribution {
+  id                 Int                 @id @default(autoincrement())
+  material           String
+  percent            String
+
+  materialId         Int?
+  handWarmerMaterial HandWarmerMaterial? @relation(fields: [materialId], references: [id])
+}
+
+// -----------------------------
+//  ENUMS
+// -----------------------------
+
+enum MovementType {
+  IN
+  OUT
+}

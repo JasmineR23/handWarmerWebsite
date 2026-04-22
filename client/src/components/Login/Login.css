@@ -1,0 +1,44 @@
+
+.signState-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  width: 350px;
+  background: var(--mystic-tulip);
+  padding: 30px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  z-index: 1000;
+}
+
+
+.signState-container form{
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+
+.username, .email, .password {
+  background: var(--light-yellow);
+  border: 2px solid var(--cactus-valley);
+  padding: 12px;
+  border-radius: var(--radius-md);
+  margin: 5px;
+}
+
+
+.account-exist span{
+    cursor: pointer;
+}
+
+.submit{
+    border: 3px solid ;
+    background-color: #8A9A6A;
+    padding: 10px 18px;
+    border-radius: 15px;
+    cursor: pointer;
+}

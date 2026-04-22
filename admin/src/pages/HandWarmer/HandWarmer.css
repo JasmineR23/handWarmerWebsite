@@ -1,0 +1,98 @@
+/* Container for the whole page */
+.add-handwarmer-container {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #F1F5F2; /* light sage */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  font-family: Arial, sans-serif;
+}
+
+/* Page title */
+.add-handwarmer-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #4F6F4C; /* deep sage */
+}
+
+/* Form layout */
+.handwarmer-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* All input fields */
+.handwarmer-form input,
+.handwarmer-form textarea {
+  padding: 10px;
+  border: 2px solid #B7CBB2; /* medium sage */
+  border-radius: 8px;
+  background: #DCE7D9; /* soft sage */
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+}
+
+/* Input focus effect */
+.handwarmer-form input:focus,
+.handwarmer-form textarea:focus {
+  border-color: #8FAF8C; /* darker sage */
+}
+
+/* Textarea size */
+.handwarmer-form textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+/* Materials section title */
+.handwarmer-form h3 {
+  margin-top: 10px;
+  color: #4F6F4C;
+}
+
+/* Each material block */
+.material-section {
+  background: #E6EFE5; /* pale sage */
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #B7CBB2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Add Material button */
+.add-material-btn {
+  padding: 10px;
+  background: #8FAF8C; /* darker sage */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.add-material-btn:hover {
+  background: #6E8F6B; /* deeper sage */
+}
+
+/* Submit button */
+.submit-btn {
+  padding: 12px;
+  background: #6E8F6B; /* deep sage */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: 0.2s;
+}
+
+.submit-btn:hover {
+  background: #4F6F4C; /* darkest sage */
+}
